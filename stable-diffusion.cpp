@@ -3730,3 +3730,15 @@ SD_API sd_image_t* generate_video(sd_ctx_t* sd_ctx, const sd_vid_gen_params_t* s
 
     return result_images;
 }
+
+void free_sd_image(sd_image_t* sd_img,int img_num) {
+    if(sd_img != nullptr){
+        for (int i = 0; i < img_num; i++) {
+            if(sd_img[i].data != nullptr){
+                free(sd_img[i].data);
+                sd_img[i].data = nullptr;
+            }
+        }
+        free(sd_img);
+    }
+}
